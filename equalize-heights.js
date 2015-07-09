@@ -24,12 +24,12 @@
  *
  * Description: Finds the tallest height of an element and sets all sibblings to the same height. 
  * Dependencies: jQuery 2.1.4;					  
- * Usage Example: In the HTML view, add the css class "equalizeChildren" to the parent container
+ * Usage Example: In the HTML view, add the css class "equalizeRow" to the parent container (or row)
  * of the divs you'd like to equalize in heights. 
  * 
  * Example:
  *
- * <div class="equalizeChildren">
+ * <div class="equalizerow">
  *	    <div>These are the divs you'd like to equalize in heights</div>
  *	    <div>These are the divs you'd like to equalize in heights</div>
  *	    <div>These are the divs you'd like to equalize in heights</div>
@@ -39,26 +39,26 @@
 
 --------------------------------------------------------------------*/
 function equalizeHeights(){
-	var tallest = 0;
+var tallest;	
 
-	$(".equalizeChildren").children().each(function(){
+	// Finds all instances of class "equalizeRow" and runs the function
+	$(".equalizerow").each(function(){
 		
-		// Reset all heights
-		$(this).height("auto");
-		
-		var currentHeight = $(this).height();
-		
-		// Loop through each child div and set the max height to variable "tallest"
-		if (currentHeight > tallest){
-			tallest = currentHeight;
-		}
+		tallest = 0;
 
+		// Loop through each child div to see which is tallest and store in "tallest" variable
+		$(this).children().each(function(){
+			var currentHeight = $(this).height();
+			if (currentHeight > tallest){
+				tallest = currentHeight;
+			};
+			
+		});
+
+		// Set all children to the tallest height for that row/parent
+		$(this).children().height(tallest);
 	});
 
-	// Set all children to the tallest height
-	$(".equalizeChildren").children().each(function(){
-		$(this).height(tallest);
-	});
 };
 
 // Initialize equal child heights
@@ -66,5 +66,9 @@ equalizeHeights();
 
 // Equalize heights again on resize
 $(window).resize(function(){
+		
+	// Reset all heights
+	$(".equalizerow").children().height("auto");
+
 	equalizeHeights();
 })
