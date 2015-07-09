@@ -1,5 +1,5 @@
 # Equalize div heights on resize
-Equalizes the heights of sibling divs by adding the class "equalizeChildren" to the containing element. Uses window.resize() to reset the heights and run the equalize function again. 
+Equalizes the heights of sibling divs by adding the class "equalizeChildren" to the parent element. Uses window.resize() to reset the heights and run the equalize function again. 
 
 ## Dependencies: 
 jQuery
